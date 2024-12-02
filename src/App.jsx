@@ -62,6 +62,7 @@ const App = () => {
       </header>
 
       <main className="px-6 py-10">
+        <h1 className="text-yellow-200">Click on Image To Download </h1>
         {/* Loader */}
         {loading && (
           <div className="text-center">
