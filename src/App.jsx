@@ -15,22 +15,30 @@ const App = () => {
   }, [query, page]);
 
   const fetchImages = async () => {
-    setLoading(true); // Set loading to true when fetching starts
-    const url = `https://api.unsplash.com/search/photos?page=${page}&query=${query}&client_id=${UNSPLASH_API_KEY}&per_page=12`;
+    setLoading(true);
+    const url = `https://api.unsplash.com/search/photos?page=${page}&query=${query}&client_id=${UNSPLASH_API_KEY}&per_page=16`;
     try {
       const response = await fetch(url);
       const data = await response.json();
-      if (page === 1) {
-        setImages(data.results); // Replace images on new search
+  
+      console.log("API Response:", data); // Debugging
+  
+      if (data.results && data.results.length > 0) {
+        if (page === 1) {
+          setImages(data.results);
+        } else {
+          setImages((prevImages) => [...prevImages, ...data.results]);
+        }
       } else {
-        setImages((prevImages) => [...prevImages, ...data.results]); // Append new images for "More Photos"
+        console.log("No more results found.");
       }
     } catch (error) {
       console.error("Error fetching images:", error);
     } finally {
-      setLoading(false); // Set loading to false after images are fetched
+      setLoading(false);
     }
   };
+  
 
   const handleSearch = (e) => {
     e.preventDefault();
