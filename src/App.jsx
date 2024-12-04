@@ -16,7 +16,7 @@ const App = () => {
 
   const fetchImages = async () => {
     setLoading(true);
-    const url = `https://api.unsplash.com/search/photos?page=${page}&query=${query}&client_id=${UNSPLASH_API_KEY}&per_page=16`;
+    const url = `https://api.unsplash.com/search/photos?page=${page}&query=${query}&client_id=${UNSPLASH_API_KEY}&per_page=18`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -92,6 +92,7 @@ const App = () => {
                     className="w-full h-48 object-cover transform hover:scale-105 transition duration-300"
                   />
                 </a>
+                {/* <h1 className="text-yellow-400  p-2">{image.alt_description}</h1> */}
               </div>
             ))}
           </div>
